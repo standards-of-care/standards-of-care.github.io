@@ -4,6 +4,7 @@ import './App.css';
 
 const FOLDER_ID = '12OGdVgcRvXEkw-eJsG4uJF5RyfTikEV0' // test folder on my google drive, hardcoded for now
 const API_KEY = 'AIzaSyBOs5HKZSw6hFG90oX1mUD5K1t3ayMFx-E' // hardcoded google drive api key for now
+const FIELDS = 'fields=files(id, name, thumbnailLink, modifiedTime)' // list of fields to return from API
 
 class App extends React.Component {
 
@@ -22,7 +23,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <APICall />
+      <div className="App">
+        <APICall />
+      </div>
     )
   }
 }
@@ -34,7 +37,13 @@ class FileResult extends React.Component {
 
   render() {
     return (
-      <a href={this.props.fileURL}>{this.props.fileName}</a>
+      <a href={this.props.fileURL} className="file-result">
+        <img src={this.props.thumbnailLink} className="file-thumbnail"/>
+        <div className="file-info">
+          <span className="file-name">{this.props.fileName}</span>
+          <span className="file-date">{this.props.modifiedTime}</span>
+        </div>
+      </a>
     )
   }
 }
@@ -45,21 +54,25 @@ function APICall (props) {
   // build the API search query to get a list of all files
   const searchQuery = "q='" + FOLDER_ID + "' in parents"
   const apiQuery = "key=" + API_KEY
-  const url = "https://www.googleapis.com/drive/v3/files?"
+  const apiURL = "https://www.googleapis.com/drive/v3/files?"
 
   // run HTTP request and parse results into JSX elements
   const fetchFileList = async() => {
-    const result = await fetch(url + searchQuery + "&" + apiQuery)
+    const result = await fetch(apiURL + searchQuery + "&" + apiQuery + "&" + FIELDS)
     const jsonData = await result.json()
+
+    console.log(jsonData.files)
 
     var fileListArray = []
     for (var i = 0; i < jsonData.files.length; i++) {
-      const fileName = jsonData.files[i].name
+      const fileName = parseFileName(jsonData.files[i].name)
       const fileID = jsonData.files[i].id
+      const thumbnailLink = jsonData.files[i].thumbnailLink
+      const modifiedTime = parseModifiedTime(jsonData.files[i].modifiedTime)
       const fileURL = getFileURL(fileID)
 
-      // create a link to each file returned
-      fileListArray[i] = <FileResult fileName={fileName} fileURL={fileURL} key={fileID}/>
+      // create a an entry for every file returned
+      fileListArray[i] = <FileResult fileName={fileName} fileURL={fileURL} thumbnailLink={thumbnailLink} modifiedTime={modifiedTime} key={fileID}/>
     }
     
     setFileList(fileListArray)
@@ -78,6 +91,14 @@ function APICall (props) {
 
 function getFileURL(fileID) {
   return ("https://drive.google.com/file/d/" + fileID)
+}
+
+function parseModifiedTime(rawTime) {
+  return(rawTime.split('T')[0])
+}
+
+function parseFileName(rawFileName) {
+  return (rawFileName.split('.')[0])
 }
 
 export default App;
