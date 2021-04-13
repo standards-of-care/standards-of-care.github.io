@@ -1,61 +1,169 @@
 .App {
   display: flex;
+  flex-direction: column;
+  width:100vw;
+  height: 100vh;
+  justify-content: flex-start;
+  align-items: center;
+
+  background-color: #f2f4f7;
+
+  background-image: url("./campus.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header {
+  background-color: #002f86 ;
+  height: 80px;
+  flex: none;
+  display: flex;
   flex-direction: row;
-  width:100%;
-  height: 100%;
-  justify-content: center;
+  align-items: center;
+  justify-content: left;
+  font-size: 24px;
+  color: white;
+  padding-left: 25px;
+
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home-link {
+  color: white;
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.subheader {
+  min-height: 80px;
+  background-color: white;
+  flex: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-bottom: 1px solid #486581;
 }
 
-.App-link {
-  color: #61dafb;
+#search-bar {
+  height: 45%;
+  min-width: 40%;
+  display: flex;
+  flex-direction: row;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+}
+
+#search-bar:focus-within {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#search-bar input {
+  border-radius: 50px 0 0 50px;
+  font-size: 16px;
+  height: 100%;
+  width: 100%;
+  background-color: #F8F9FB;
+  border: 1px solid #829AB1;
+  border-right-style: hidden;
+  outline: none;
+  padding: 0 20px 0 20px;
+
+  transition: all 0.2s ease;
+}
+
+#search-bar:focus-within input {
+  background-color: white;
+  border: 1px solid #486581;
+  border-right-style: hidden;
+}
+
+#search-bar button {
+  height: 100%;
+  width: 60px;
+  border-radius: 0 50px 50px 0;
+  color:white;
+  border: 1px solid #829AB1;
+  background-color: #0087c2;
+  line-height: 100%;
+  font-size: 16px;
+  text-align: center;
+
+  transition: all 0.2s ease;
+}
+
+#search-bar:focus-within button {
+  border: 1px solid #486581;
+  background-color: #0075a8;
+}
+
+#search-bar:focus-within button:hover {
+  background-color: #0087c2;
+}
+
+#search-bar button:hover {
+  cursor: pointer;
+  background-color: #0075a8;
+}
+
+.main-view {
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+  width:100%;
+  height: 100%;
+  background-color: #f2f4f7;
+  /* box-shadow: 0px 0px 200px rgba(0, 0, 0, 0.25); */
+  padding-top: 80px;
+  box-sizing: border-box;
 }
 
 .drive-file-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #f2f4f7;
-  width: 940px;
-  height: 100vh;
-  padding: 5px 10px 5px 10px;
+  align-items: center;  
+  overflow-y: scroll;
+  height: 100%;
+  padding: 25px 25px 0px 25px;
 }
 
 .file-result {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: left;
   margin: 10px;
+  margin-left: 9px;
   background-color: white;
-  width: 720px;
+  width: 100%;
   text-decoration: none;
   color: #102A43;
+
+  border: 1px solid #D9E2EC;
+}
+
+.file-result:last-child {
+  margin-top: 25px;
+  height: 25px;
+  width: 100%;
+  display: block;
+}
+
+.file-result:hover {
+  border: 1px solid #9FB3C8;
+  border-left: 10px solid #0087c2;
+  margin-left: 0px;
 }
 
 .file-thumbnail {
   width: 100px;
   height:100px;
+  flex: none;
 }
 
 .file-info {
@@ -75,11 +183,36 @@
   font-size: 16px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.subheader .file-name {
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.header-logo {
+  width:26px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+.header-text {
+  opacity: 50%;
+}
+
+.home-link {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  margin-right: 10px;
 }
