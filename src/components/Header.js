@@ -31,7 +31,7 @@ function FileInfoSubHeader (props) {
         <div className={"subheader"}>
             <p className="file-name">
                 <span>{parseFileName(props.name)}</span>
-                <a href={props.printURL} target="_blank" rel="noopener noreferrer">(Print Document)</a>
+                <a href={props.printURL} target="_blank" rel="noopener noreferrer" className="print-link">Print</a>
             </p>
             <p className="file-date">Last Modified: {props.modifiedTime}</p>
         </div>

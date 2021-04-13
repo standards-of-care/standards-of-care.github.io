@@ -1,13 +1,42 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import {useParams} from "react-router-dom"
 import {FileInfoSubHeader} from './Header'
+import {parseFileName, parseModifiedTime} from '../Utilities'
+
+import {API_KEY} from '../env'
+
+const API_URL = "https://www.googleapis.com/drive/v3/files/"
+const API_QUERY = "key=" + API_KEY
+const FIELDS = "?fields=name,modifiedTime,properties,id"
 
 function FileView (props) {
+    const [fileInfo, setfileInfo] = useState({})
+
     let {fileID} = useParams()
-    let name = "Antenatal Testing Guidelines.pdf"
-    let modifiedTime = "2021-03-24"
     let pdfURL = "https://drive.google.com/file/d/" + fileID + "/preview"
     let printURL = "https://drive.google.com/uc?id=" + fileID + "&export=print"
+
+    const getFileInfo = async() => {
+        const result = await fetch(API_URL + fileID + FIELDS + "&" + API_QUERY)
+        const jsonData = await result.json()
+
+        console.log(jsonData)
+
+        setfileInfo(jsonData)
+    }
+
+    useEffect( () => {
+        (async () => {
+            getFileInfo()
+        })()
+    }, [])
+
+    let name = '...'
+    let modifiedTime = '...'
+    if (fileInfo.name && fileInfo.modifiedTime) {
+        name = parseFileName(fileInfo.name)
+        modifiedTime = parseModifiedTime(fileInfo.modifiedTime)
+    }
 
     return (
         <div className="main-view">
