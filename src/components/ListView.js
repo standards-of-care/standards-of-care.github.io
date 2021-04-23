@@ -8,16 +8,17 @@ import FileList from './FileList'
 
 function ListView (props) {
     const [fileList, setFileList] = useState([])
+    const [searchQuery, setSearchQuery] = useState("")
 
     // build the API search query to get a list of all files
-    const searchQuery = "q='" + FOLDER_ID + "' in parents"
+    const filterQuery = "q='" + FOLDER_ID + "' in parents and name contains '" + searchQuery + "'"
     const apiQuery = "key=" + API_KEY
     const apiURL = "https://www.googleapis.com/drive/v3/files?"
 
 
     // run HTTP request and parse results into JSX elements
     const fetchFileList = async() => {
-        const result = await fetch(apiURL + searchQuery + "&" + apiQuery + "&" + FIELDS + "&orderBy=name")
+        const result = await fetch(apiURL + filterQuery + "&" + apiQuery + "&" + FIELDS + "&orderBy=name")
         const jsonData = await result.json()
 
         console.log(jsonData.files)
@@ -41,16 +42,14 @@ function ListView (props) {
     useEffect(() => {
         (async () => {
             fetchFileList()
-            // const auth2 = loadAuth2(gapi, CLIENT_ID, '')
-            // console.log(auth2)
         })()
 
-    }, [])
+    }, [searchQuery])
 
     // add list to the DOM
     return (
         <div className="main-view">
-            <SearchSubHeader />
+            <SearchSubHeader updateFunction={setSearchQuery} />
             <FileList files={fileList} />
         </div>
     )

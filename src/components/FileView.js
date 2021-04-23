@@ -9,6 +9,8 @@ const API_URL = "https://www.googleapis.com/drive/v3/files/"
 const API_QUERY = "key=" + API_KEY
 const FIELDS = "?fields=name,modifiedTime,properties,id"
 
+const tags = ["Guideline", "tag #2", "tag #3", "tag #4", "test"]
+
 function FileView (props) {
     const [fileInfo, setfileInfo] = useState({})
 
@@ -40,7 +42,7 @@ function FileView (props) {
 
     return (
         <div className="main-view">
-            <FileInfoSubHeader name={name} modifiedTime={modifiedTime} printURL={printURL} />
+            <FileInfoSubHeader name={name} modifiedTime={modifiedTime} printURL={printURL} tags={tags} />
              <iframe className="pdf-frame" src={pdfURL}></iframe>
         </div>
     )
