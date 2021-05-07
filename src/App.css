@@ -14,10 +14,20 @@
   background-size: cover;
 }
 
-.header {
+.header-wrapper {
   background-color: #002f86 ;
   height: 60px;
   flex: none;
+  box-sizing: border-box;
+  padding: 0 15px 0 15px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,15 +35,12 @@
   font-size: 22px;
   color: white;
 
-  box-sizing: border-box;
-  padding: 0 15px 0 15px;
-  position: absolute;
-  top: 0;
-
   width: 100%;
+  max-width: 1024px;
 }
 
 .header-home-wrapper {
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,6 +55,7 @@
   color: white;
   font-size: 22px;
   line-height: 100%;
+  margin-right: 10px;
 }
 
 .home-link {
@@ -161,8 +169,9 @@
   margin-left: 9px;
   background-color: white;
   width: 100%;
+  min-height: 100px;
   text-decoration: none;
-  color: #102A43;
+  color: #0b1d2e;
 
   border: 1px solid #D9E2EC;
 }
@@ -180,18 +189,36 @@
   margin-left: 0px;
 }
 
+.new-file {
+  justify-content: center;
+  border: 1px solid #A3D9A5;
+}
+
+.new-file:hover {
+  border-color: #6ca438;
+}
+
 .file-thumbnail {
   width: 100px;
   height:100px;
   flex: none;
+  border-right: 1px solid #eaeff5;
 }
 
 .file-info {
   display: flex;
   flex-direction: column;
-  height: 50%;
+  height: 100%;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: 10px 20px 10px 20px;
+  box-sizing: border-box;
+}
+
+.file-name-date {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  padding-left: 10px;
 }
 
 .file-name {
@@ -199,8 +226,14 @@
 }
 
 .file-date {
-  color: #486581;
+  color: #829AB1;
   font-size: 16px;
+}
+
+.file-tags {
+  display: flex;
+  flex-direction: row;
+  justify-self: self-end;
 }
 
 .subheader-wrapper {
@@ -233,7 +266,7 @@
 }
 
 .header-text {
-  opacity: 50%;
+  color: #8097c3;
 }
 
 .home-link {
@@ -241,13 +274,13 @@
   flex-direction: row;
   height: 100%;
   align-items: center;
-  margin-right: 10px;
+  padding: 0 10px 0 10px;
   outline: none;
   box-sizing: border-box;
 }
 
 .home-link:hover {
-  border-bottom: 5px solid white;
+  border-bottom: 5px solid #0087c2;
   border-top: 5px solid transparent;
 }
 
@@ -283,22 +316,238 @@
 #tags-list {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+#tags-list span {
+  width: auto;
+  height: auto;
+  line-height: 0;
 }
 
 .tag {
-  background-color: #6ca438;
-  border-radius: 50px;
-  color: white;
+  color: #5f9132;
+  border: 1px solid #6ca438;
+  border-radius: 12px;
   padding: 2px 10px 2px 10px;
   margin-right: 5px;
   font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.tag:hover {
-  background-color: #44810B;
+.add-tag-button {
+  stroke: #6ca438;
+  border: none;
+  width: 24px;
+  height: 24px;
+  stroke-width: 1;
+  padding: 0;
+}
+
+.add-tag-button:hover {
+  stroke: white;
+}
+
+.remove-tag-button {
+  color: #6ca438;
+  width: auto;
+  display: inline-block;
+  padding-left: 4px;
+}
+
+.tag:hover .remove-tag-button {
+  color: #213211;
+}
+
+.tag:hover .remove-tag-button:hover {
+  color: #BA2525;
+}
+
+#tags-list .tag:hover {
+  background-color: #6ca438;
+  color: white;
   cursor: pointer;
 }
+
+.tag-input {
+  padding: 1px 0 1px 0;
+  background-color: transparent;
+  color: #213211;
+}
+
+#tags-list .tag-input:hover {
+  background-color: transparent;
+}
+
+.input-has-suggestions {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.submit-button, .delete-button {
+  border-radius: 50px;
+  background-color: #6ca438;
+  width: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 5px 10px 5px 10px;
+  color: white;
+  border: 1px solid #466b25;
+}
+
+.delete-button {
+  background-color: transparent;
+  border-color: #780A0A;
+  color: #780A0A;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #AB091E;
+  border-color: #610404;
+}
+
+.submit-button.active:hover {
+  cursor: pointer;
+  background-color: #5f9132;
+}
+
+.inactive {
+  background-color: #D9E2EC;
+  border: 1px solid transparent;
+  color: #BCCCDC
+}
+
+.inactive:hover {
+  cursor: default;
+}
+
+.edit-main-view {
+  align-items: center;
+}
+
+.edit-file {
+  width: 100%;
+  max-width: 600px;
+  padding-top: 20px;
+}
+
+.edit-file #tags-list {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.tags-label {
+  padding-right: 15px;
+}
+
+.edit-name {
+  font-size: 22px;
+  font-weight: bold;
+  background-color: white;
+}
+
+.edit-name .waiting {
+  background-color: white;
+}
+
+.edit-name .waiting:hover {
+  cursor: pointer;
+  background-color: #D9E2EC;
+}
+
+.edit-name input {
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #D9E2EC;
+}
+
+.file-upload-picker {
+  display: flex;
+  flex-direction: column;
+}
+
+#submit-delete-buttons {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.react-autosuggest__container {
+  position: relative;
+  width: 140px;
+}
+
+.react-autosuggest__input {
+  padding: 0 15px 0 15px;
+  box-sizing: border-box;
+  border: none;
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+  color: #466b25
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+}
+
+.react-autosuggest__input--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  left: -1px;
+  width: 100%;
+  border: 1px solid #5f9132;
+  background-color: #6ca438;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 0 15px 0 15px;
+  height: 24px;
+  box-sizing: border-box;
+  line-height: 24px;
+  color: #213211;
+}
+
+.react-autosuggest__suggestion:last-of-type {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #5f9132;
+  color: white;
+}
+
 
 @media only screen and (max-width: 550px) {
   .print-link::after {

@@ -7,6 +7,8 @@ import {
 
 import ListView from './components/ListView'
 import FileView from './components/FileView'
+import ManageView from './components/ManageView'
+import EditFileView from './components/EditFileView'
 import {Header} from './components/Header'
 import './App.css';
 
@@ -22,8 +24,20 @@ function App (props) {
             <ListView />
           </Route>
 
-          <Route path="/:fileID">
+          <Route path="/manage">
+            <ManageView />
+          </Route>
+
+          <Route path="/upload">
+            <EditFileView isNewFile={true} />
+          </Route>
+
+          <Route exact path="/:fileID">
             <FileView />
+          </Route>
+
+          <Route exact path="/:fileID/edit">
+            <EditFileView />
           </Route>
         </Switch>
         

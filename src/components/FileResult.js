@@ -1,22 +1,30 @@
 import React from "react"
 import {Link} from "react-router-dom"
 
-class FileResult extends React.Component {
-    constructor(props) {
-      super(props)
-    }
+function FileResult(props) {
+
+  let tagsList = props.tags.map(txt => <div className="tag" key={txt}>{txt}</div>)
   
-    render() {
-      return (
-        <Link to={'./'+this.props.fileID} className="file-result">
-          <img src={this.props.thumbnailLink} className="file-thumbnail"/>
-          <div className="file-info">
-            <span className="file-name">{this.props.fileName}</span>
-            <span className="file-date">{this.props.modifiedTime}</span>
-          </div>
-        </Link>
-      )
-    }
+  return (
+    <Link to={'./'+props.fileID} className="file-result">
+      <img src={props.thumbnailLink} className="file-thumbnail"/>
+      <div className="file-info">
+        <div className="file-name-date">
+          <span className="file-name">{props.fileName}</span>
+          <span className="file-date">{props.modifiedTime}</span>
+        </div>
+        <span className="file-tags">{tagsList}</span>
+      </div>
+    </Link>
+  )
 }
 
-export default FileResult
+function NewFile(props) {
+  return (
+    <Link to="/upload" className="file-result new-file">
+      Upload New File
+    </Link>
+  )
+}
+
+export { FileResult, NewFile }

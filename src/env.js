@@ -1,7 +1,12 @@
 /* FOR TEMPORARY DEVELOPMENT USE */
 const API_KEY = 'AIzaSyBOs5HKZSw6hFG90oX1mUD5K1t3ayMFx-E' // hardcoded google drive api key for now
 const CLIENT_ID = '104314212312072138167'
-const FOLDER_ID = '12OGdVgcRvXEkw-eJsG4uJF5RyfTikEV0' // test folder on my google drive, hardcoded for now
-const FIELDS = 'fields=files(id, name, thumbnailLink, modifiedTime)' // list of fields to return from API
+// const FOLDER_ID = '12OGdVgcRvXEkw-eJsG4uJF5RyfTikEV0' // test folder on my google drive, hardcoded for now
+const FOLDER_ID = '1wau2O_imSs3Mc58qEyRFf5l83Oi-LZqY'
+const DRIVE_ID = '0ADMiFg5bnF-ZUk9PVA'
+const FIELDS = 'fields=files(id, name, thumbnailLink, modifiedTime, properties)' // list of fields to return from API
+const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwPPkW/MC15UPy\n2lOWP2G8pGBvPlzkVkmWNGus5dAaPL5lLB3b4rAdz3HYMGLdvOdF66FbunePhLv1\nfDu4TlwAit2EcwDg1HkBcKG2/v092l4s9JWa1NFlGtDUCixWOmZyHhEl1NnLza5f\naKBpRNJ780CBFkRc+Lgq7p6TWffIOmWNf2v1riTuucJrtefMupADn0ihp+N6bC6b\ny1AttjnE445ulFPzLogPJZc+95iTu73HEY3oQS2W9lA0mPO6SMfUQaeiZm685wxQ\nqQLhhwLXQMuGzKfTx0nkEEAvsFJq/kCb8Dvx3VDqeGpmzDnNz8k3QPmHGfRbm7M0\ncD0DG+IlAgMBAAECggEABVy1j3d9PYuON7Ng269t/9lYfcn99YySjJlntUkAveuf\nN2DSP8Bz71RCeHtwZqK6vqveqvXPcXRua5euEXuA3Rtchg0ht7V/QQX2RaUYe2tL\ndj6y1pUnEdZxCCKPGsiIGWzExMvnHIZTid+bEdjgNpk+Gy9cQR/oKpY8COux2Eux\nlEnJvqVXl6pYnIT3Vd7IOR+BNylRVZ49Y3x2TWF8Uru9uhacnWfyl7krtw1mcmUz\n2+ijcxPBFZ4Od/7lsHZgaxz1ihruYb8noqCAtJ7kEvHfyBEMbF85y63V9Pl3Sykd\n9SU+C65XeCG34rSQTBh9bnrRIC0snBcyAnzrssk5uQKBgQDo8qDrSXgp5+Bkms3S\nLXfDt3QxCtKqDAeudeUW1SP690Qd4920QdPq+kZvSxlDTesFDFCRTfHEss2mx1Xa\nmPhDMpZmtSUSPSQNcwc3CNRzcO2/FA6xafqIeAxXGkz5M+1VdOmAK2MNLh6lcAAW\noSOHvpc9p3FICb4V24xaFR0txwKBgQDBrbHSA1+L+P3K1RGzK/S6VfXlsLLA4sOi\nE7ASmAVRAXtuxC+6psEQq6BRxwwaPeaDsTCB5y/OZWyx5L3f89uTE3+E1ZJwLvBE\nOMSLxDUqxE8alAP/eYIDjXFXZAislcL5PbmMqvQVMxU1ob+vB5jNSWKovsD3ImNh\nC/8UhiQgswKBgQC/pDw21W6CKz00Bxckvjs1TIvOfPTq6JK5OEyMCDVdlmb3oCsY\nzL8nJVck4EecU1HyCTuPDuzDwcXmWz+KYyZ7Qfbx8DzbUGmElwlsgVsmzdUJydp8\noo92Di04y25f5hRupYwj4Y3Png2gVQ/9jfvJBUcvdb2AYmN7X++LfKtQqQKBgDDV\nJpyZFSIpqXPWvRu73XyN5+3921Qe2MyowiAuDEkcYo7PEGmzWcJmQ4na8gY7zT8v\nEdfu/nK/x+QilG0/AwHWTLSlVMLMUvAgkA3dbrpVvMwqvcdQT6OtqgIqyrUZHYvS\nMFJzWA9wTcyz96yd8bzw39tEHUsydHQnni0ClWFZAoGAU0NFNGiljNshag/xGmuj\nMTsRE4BW0Iphm4ko5OT0Y0eMktUGQw446KbMcgO1n9FxIojh7Td5gehn0i0v7deN\nQOgd9kGogOXc/sv6hoxypG2LPc8di6M1FaTbs9IzvcsKflRnpmCUT7fk5g+t0zja\nVL9k0k/KLdkz64y9jqHXn+w=\n-----END PRIVATE KEY-----\n"
+const ISS = "frontend@standards-of-care.iam.gserviceaccount.com"
+const SCOPE = 'https://www.googleapis.com/auth/drive'
 
-export {API_KEY, CLIENT_ID, FOLDER_ID, FIELDS}
+export {API_KEY, CLIENT_ID, FOLDER_ID, FIELDS, PRIVATE_KEY, ISS, SCOPE, DRIVE_ID}
