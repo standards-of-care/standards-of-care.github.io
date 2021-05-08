@@ -50,12 +50,56 @@
 #menu-button {
   box-sizing: border-box;
   padding: 5px;
+  display: inline-block;
+  width: 35px;
   background-color: transparent;
   border: none;
   color: white;
   font-size: 22px;
   line-height: 100%;
   margin-right: 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+#menu-button:hover {
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+#menu-button.log-out {
+  background-color: #264e98;
+}
+
+.oauth-button {
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  color: #8097c3;
+  border: 1px solid #8097c3;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.oauth-button:hover {
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  border-color: white;
+}
+
+.oauth-button.log-out {
+  background-color: #8097c3;
+  color: #002f86;
+  border-color: #002f86;
+}
+
+.oauth-button.log-out:hover {
+  background-color: #19216C;
+  color: #8097c3;
+  border-color: #8097c3;
 }
 
 .home-link {
@@ -88,13 +132,14 @@
 }
 
 #search-bar input {
-  border-radius: 50px 0 0 50px;
+  border-radius: 0;
   font-size: 16px;
   height: 100%;
   width: 100%;
   background-color: #F8F9FB;
   border: 1px solid #829AB1;
   border-right-style: hidden;
+  border-left-style: hidden;
   outline: none;
   padding: 0 20px 0 20px;
 
@@ -105,6 +150,7 @@
   background-color: white;
   border: 1px solid #486581;
   border-right-style: hidden;
+  border-left-style: hidden;
 }
 
 #search-bar button {
@@ -139,6 +185,42 @@
   background-color: #0075a8;
 }
 
+#search-bar #filter-select {
+  appearance: none;
+  background-color: white;
+  outline: none;
+  border: 1px solid #829AB1;
+  border-radius: 50px 0 0 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  box-sizing: border-box;
+  padding-left: 15px;
+}
+
+#search-bar #filter-select.not-selected {
+  width: 45px;
+  color: #486581;
+}
+
+#search-bar #filter-select:after {
+  content: "test";
+  display: inline-block;
+  width: auto;
+  height: auto;
+}
+
+#search-bar #filter-select:hover {
+  cursor: pointer;
+}
+
+#search-bar:focus-within #filter-select {
+  background-color: #F8F9FB;
+  border-color: #486581;
+}
+
 .main-view {
   display: flex;
   flex-direction: column;
@@ -170,6 +252,7 @@
   background-color: white;
   width: 100%;
   min-height: 100px;
+  height: auto;
   text-decoration: none;
   color: #0b1d2e;
 
@@ -196,6 +279,10 @@
 
 .new-file:hover {
   border-color: #6ca438;
+}
+
+.new-file span {
+  margin-right: 10px;
 }
 
 .file-thumbnail {
@@ -234,6 +321,7 @@
   display: flex;
   flex-direction: row;
   justify-self: self-end;
+  flex-wrap: wrap;
 }
 
 .subheader-wrapper {
@@ -303,7 +391,7 @@
   background-color: #0075a8;
 }
 
-.print-link::after {
+.print-link:after {
   content: " Document";
   display: inline-block;
   white-space: pre;
@@ -429,18 +517,29 @@
 }
 
 .edit-main-view {
+  justify-content: center;
   align-items: center;
+  background-color: transparent;
 }
 
 .edit-file {
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   padding-top: 20px;
+  background-color: #f2f4f7;
+  padding: 50px;
+  top: -100px;
+  position: relative;
+  border-radius: 50px;
 }
 
 .edit-file #tags-list {
   margin-bottom: 20px;
   margin-top: 20px;
+}
+
+.edit-file h1 {
+  cursor: default;
 }
 
 .tags-label {
@@ -460,6 +559,11 @@
 .edit-name .waiting:hover {
   cursor: pointer;
   background-color: #D9E2EC;
+}
+
+.empty {
+  color: #9FB3C8;
+  background-color: white;
 }
 
 .edit-name input {
@@ -550,7 +654,7 @@
 
 
 @media only screen and (max-width: 550px) {
-  .print-link::after {
+  .print-link:after {
     content: none;
   }
 }

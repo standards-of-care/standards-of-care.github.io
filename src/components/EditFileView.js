@@ -87,8 +87,13 @@ function EditFileView(props) {
 
     useEffect( () => {
         (async () => {
-            const oauth = await getAccessToken()
-            setOauthToken(oauth.access_token)
+            if (props.isAuth) {
+                setOauthToken(props.authToken)
+                console.log(`access token passed down: ${props.authToken}`)
+            } else {
+                const oauth = await getAccessToken()
+                setOauthToken(oauth.access_token)
+            }
         })()
     }, [])
 
@@ -263,21 +268,41 @@ function EditFileView(props) {
         }
     }
 
-    let tagsList = fileTags.map(tagName => <FileTag tagName={tagName} isAuth={true} removeTag={removeTag} key={tagName} />)
+    if (!props.isAuth) {
+        return(
+            <div className="main-view edit-main-view">
+                <div className="edit-file">
+                    <p>Access Denied: insufficient permissions.</p>
+                    <p>Sign in as administrator to edit or upload files.</p>
+                </div>
+            </div>
+        )
+    }
+
+    let tagsList = fileTags.map(tagName => <FileTag tagName={tagName} isAuth={props.isAuth} removeTag={removeTag} key={tagName} />)
     let addTagButton = <AddTag addTag={addTag} globalTags={globalTags} />
+    
+    let tagsModule = !props.isNewFile ? (
+        <div id="tags-list" title={"Changes to tags may take a few minutes to appear in search"}>
+            <span className="tags-label">Tags:</span>
+            {tagsList}
+            {addTagButton}
+        </div>
+    ) : null
     let deleteButton = !props.isNewFile ? <DeleteButton fileName={fileInfo.name} deleteFile={deleteFile} /> : null
+    let pageTitle = !props.isNewFile ? "Edit File" : "Upload New File"
+    let titleHover = !props.isNewFile ? `Current File Name: ${parseFileName(fileInfo.name)}` : ""
 
     return (
         <div className="main-view edit-main-view">
             <div className="edit-file">
+                <h1 title={titleHover}>{pageTitle}</h1>
+                <hr />
+
                 <span>File Name:</span>
                 <EditName name={parseFileName(newFileInfo.name)} editName={editName} />
 
-                <div id="tags-list">
-                    <span className="tags-label">Tags:</span>
-                    {tagsList}
-                    {addTagButton}
-                </div>
+                {tagsModule}
 
                 <div id="file-upload">
                     <span>Upload New File:</span>

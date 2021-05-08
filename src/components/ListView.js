@@ -1,23 +1,18 @@
 import React, {Fragment, useEffect, useState} from "react"
-import jws from "jws"
 
 import {FOLDER_ID, FIELDS, DRIVE_ID} from '../env'
 import {getFileURL, parseModifiedTime, parseFileName, getAccessToken, parseTags} from '../Utilities'
 import {FileResult} from './FileResult'
 import {SearchSubHeader} from './Header'
 import FileList from './FileList'
-
-const FILTER_DEFAULT = 0
-const FILTER_NAME = 1
-const FILTER_TAGS = 2
+import {FILTER_DEFAULT, FILTER_TAGS, FILTER_NAME} from '../filterEnv'
 
 function ListView (props) {
+    const [isBeforeLoad, setIsBeforeLoad] = useState(true)
     const [fileList, setFileList] = useState([])
     const [searchQuery, setSearchQuery] = useState("")
     const [filter, setFilter] = useState(FILTER_DEFAULT)
     const [oauthToken, setOauthToken] = useState("")
-
-    const isAuth = true;
 
     // build the API search query to get a list of all files
     const filterQuery = "q='" + FOLDER_ID + "' in parents"
@@ -40,7 +35,12 @@ function ListView (props) {
         })
         const jsonData = await result.json()
 
-        setFileList(createFileList(jsonData, searchQuery, FILTER_DEFAULT))
+        setFileList(createFileList(jsonData, searchQuery, filter))
+        setIsBeforeLoad(false)
+    }
+
+    const updateFilter = (newVal) => {
+        setFilter(newVal)
     }
 
     // run fetchFileList() when component loads for the first time
@@ -54,6 +54,14 @@ function ListView (props) {
 
     }, [searchQuery, oauthToken])
 
+    useEffect( () => {
+        if (oauthToken != "") {
+            fetchFileList()
+
+            console.log(`updated filter: ${filter}`)
+        }
+    }, [filter])
+
     useEffect(() => {
         (async () => {
             const oauth = await getAccessToken()
@@ -64,8 +72,8 @@ function ListView (props) {
     // add list to the DOM
     return (
         <div className="main-view">
-            <SearchSubHeader updateFunction={setSearchQuery} />
-            <FileList files={fileList} isAuth={isAuth} />
+            <SearchSubHeader updateFunction={setSearchQuery} updateFilter={updateFilter} />
+            <FileList isBeforeLoad={isBeforeLoad} files={fileList} isAuth={props.isAuth} />
         </div>
     )
 }
@@ -78,6 +86,7 @@ function createFileList(jsonData, searchQuery, filter) {
         const thumbnailLink = jsonData.files[i].thumbnailLink
         const modifiedTime = parseModifiedTime(jsonData.files[i].modifiedTime)
         const fileURL = getFileURL(fileID)
+
         var tagsList = []
         if ("properties" in jsonData.files[i]) {
             if ("tags" in jsonData.files[i].properties) {
@@ -95,28 +104,31 @@ function createFileList(jsonData, searchQuery, filter) {
                 isTagMatch = true
             }
         }
+
+        const setFileResult = () => {
+            // create a an entry for the current file returned
+            fileListArray[i] = <FileResult fileName={fileName} fileURL={fileURL} fileID={fileID} thumbnailLink={thumbnailLink} modifiedTime={modifiedTime} tags={tagsList} key={fileID}/>
+        }
         
         switch(filter) {
             case FILTER_DEFAULT:
-                if (!isTagMatch && !isNameMatch) {
-                    continue
+                if (isTagMatch || isNameMatch) {
+                    setFileResult()
                 }
                 break
             case FILTER_NAME:
-                if (!isNameMatch) {
-                    continue
+                if (isNameMatch) {
+                    setFileResult()
                 }
                 break
             case FILTER_TAGS:
-                if (!isTagMatch) {
-                    continue
+                if (isTagMatch) {
+                    setFileResult()
                 }
+                break
         }
 
-        console.log(tagsList)
-
-        // create a an entry for the current file returned
-        fileListArray[i] = <FileResult fileName={fileName} fileURL={fileURL} fileID={fileID} thumbnailLink={thumbnailLink} modifiedTime={modifiedTime} tags={tagsList} key={fileID}/>
+        
     }
 
     return fileListArray

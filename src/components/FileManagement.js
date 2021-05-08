@@ -76,11 +76,13 @@ function EditName(props) {
     const [formValue, setFormValue] = useState("")
     const [isEditing, setIsEditing] = useState(false)
 
-    let displayValue
+    let displayValue, isEmptyClass
     if (props.name === "") {
         displayValue = "Enter File Name"
+        isEmptyClass = " empty"
     } else {
         displayValue = props.name
+        isEmptyClass = ""
     }
 
 
@@ -103,13 +105,13 @@ function EditName(props) {
     let content
     if (isEditing) {
         content = (
-            <form className="editing" onBlur={() => setIsEditing(false)} onSubmit={handleOnSubmit}>
+            <form className={`editing`} onBlur={() => setIsEditing(false)} onSubmit={handleOnSubmit}>
                 <input autoFocus defaultValue={props.name} onFocus={handleOnChange} onChange={handleOnChange} />
             </form>
         )
     } else {
         content = (
-            <div className="waiting" onClick={() => setIsEditing(true)}>
+            <div className={`waiting${isEmptyClass}`} onClick={() => setIsEditing(true)}>
                 {displayValue}
                 <FiEdit3 />
             </div>

@@ -1,4 +1,5 @@
 import React from "react"
+import { FiPlusCircle } from "react-icons/fi"
 import {Link} from "react-router-dom"
 
 function FileResult(props) {
@@ -22,7 +23,8 @@ function FileResult(props) {
 function NewFile(props) {
   return (
     <Link to="/upload" className="file-result new-file">
-      Upload New File
+      <span>Upload New File</span>
+      <FiPlusCircle />
     </Link>
   )
 }
