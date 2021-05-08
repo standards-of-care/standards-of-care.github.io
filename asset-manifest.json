@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8489f1be.chunk.css",
+    "main.js": "/static/js/main.7a2d96f2.chunk.js",
+    "main.js.map": "/static/js/main.7a2d96f2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.74d318d8.js",
+    "runtime-main.js.map": "/static/js/runtime-main.74d318d8.js.map",
+    "static/js/2.257b6cb9.chunk.js": "/static/js/2.257b6cb9.chunk.js",
+    "static/js/2.257b6cb9.chunk.js.map": "/static/js/2.257b6cb9.chunk.js.map",
+    "static/js/3.f12fef07.chunk.js": "/static/js/3.f12fef07.chunk.js",
+    "static/js/3.f12fef07.chunk.js.map": "/static/js/3.f12fef07.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.8489f1be.chunk.css.map": "/static/css/main.8489f1be.chunk.css.map",
+    "static/js/2.257b6cb9.chunk.js.LICENSE.txt": "/static/js/2.257b6cb9.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/campus.e6cf3a5c.jpg",
+    "static/media/slu-logomark.6bfb103a.png": "/static/media/slu-logomark.6bfb103a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.74d318d8.js",
+    "static/js/2.257b6cb9.chunk.js",
+    "static/css/main.8489f1be.chunk.css",
+    "static/js/main.7a2d96f2.chunk.js"
+  ]
+}
